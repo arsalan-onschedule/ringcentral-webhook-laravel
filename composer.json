@@ -1,0 +1,30 @@
+{
+    "name": "arsalanazhar/ringcentral-webhook-laravel",
+    "description": "Ringcentral webhook laravel package",
+    "authors": [
+        {
+            "name": "Arsalan Azhar",
+            "email": "9847554@yahoo.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../adaptivecard-php"
+        },
+        {
+            "type": "path",
+            "url": "../ringcentral-webhook-php"
+        }
+    ]
+    ,
+    "require": {
+        "arsalanazhar/adaptivecard-php": "dev-main",
+        "arsalanazhar/ringcentral-webhook-php": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "ArsalanAzhar\\RingCentralWebhookLaravel\\": "src/"
+        }
+    }
+}
