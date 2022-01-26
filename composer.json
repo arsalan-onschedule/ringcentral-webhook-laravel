@@ -4,27 +4,22 @@
     "authors": [
         {
             "name": "Arsalan Azhar",
-            "email": "9847554@yahoo.com"
+            "email": "arsalan.azhar@nxb.com.pk"
         }
     ],
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../adaptivecard-php"
-        },
-        {
-            "type": "path",
-            "url": "../ringcentral-webhook-php"
-        }
-    ]
-    ,
     "require": {
-        "arsalanazhar/adaptivecard-php": "dev-main",
-        "arsalanazhar/ringcentral-webhook-php": "dev-main"
+        "arsalanazhar/ringcentral-webhook-php": "0.1.0"
     },
     "autoload": {
         "psr-4": {
             "ArsalanAzhar\\RingCentralWebhookLaravel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel":{
+            "providers":[
+                "ArsalanAzhar\\RingCentralWebhookLaravel\\RingCentralLaravelProvider"
+            ]
         }
     }
 }

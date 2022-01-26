@@ -1,44 +1,33 @@
 <?php 
 
-namespace App\Channels;
+namespace ArsalanAzhar\RingCentralWebhookLaravel\Channels;
 
-use ArsalanAzhar\AdaptivecardPhp\Card;
-use ArsalanAzhar\AdaptivecardPhp\Elements\TextBlockElement;
 use ArsalanAzhar\RingCentralWebhook\RingCentralConnector;
 use Illuminate\Notifications\Notification;
 
-class RingcentralChannel{
+class RingCentralChannel{
 
     public function send($notifiable, Notification $notification)
     {
-        $data = $notification->toRingcentral($notifiable);
 
-        if (!isset($data['ringcentral_incoming_webhook_url'])) 
+        // get webhook url
+        $webhookUrl = $notification->{config('ringcentral.channel.notification.webhook_url_var_name')} ?? null;
+
+        if (!$webhookUrl) 
             return;
 
+        // parse message data from notificaiton
+        $data = $notification->toRingcentral($notifiable);
 
-        $connector = new RingCentralConnector($data['ringcentral_incoming_webhook_url']);
+        try {
+            $connector = new RingCentralConnector($webhookUrl);
 
-        $card = new Card();
+            // post message on webhook url
+            $connector->send($data);
 
-        $card->setElement(
-            (new TextBlockElement())
-                ->setText("ReTeam by BeRemote")
-                ->setWrap()
-                ->setFontType("default")
-                ->setSize("large")
-                ->setWeight("Bolder")
-                ->setColor("Accent")
-                ->setSpacing("Medium")
+        }catch (\Exception $exception) {
 
-        );
-
-
-
-
-        $card = $notification->prepareAdaptiveCardNotification($card);
-
-        $connector->send($card);
-
+            throw $exception;
+        }
     }
 }
