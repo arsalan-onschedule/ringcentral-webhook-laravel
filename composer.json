@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "arsalanazhar/ringcentral-webhook-php": "0.1.0"
+        "arsalanazhar/ringcentral-webhook-php": "0.1.1"
     },
     "autoload": {
         "psr-4": {
